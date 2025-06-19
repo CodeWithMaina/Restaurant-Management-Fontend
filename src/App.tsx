@@ -9,12 +9,27 @@ import Register from "./pages/Register";
 import { Home } from "./pages/Home";
 import LoginPage from "./pages/Login";
 import { ProtectedRoute } from "./components/home/ProtectedRoute";
+import { About } from "./pages/About";
+import { Menu } from "./pages/Menu";
+import { Contact } from "./pages/Contact";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/about",
+      element: <About />,
+    },
+    {
+      path: "/contact",
+      element: <Contact />,
+    },
+    {
+      path: "/menu",
+      element: <Menu />,
     },
     {
       path: "/register",

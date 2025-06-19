@@ -45,7 +45,7 @@ export default function LoginPage() {
 
     try {
       const res = await loginUser(loginData);
-      console.log(res)
+      // console.log(res)
       dispatch(setCredantials(res));
       navigate('/dashboard')
     } catch (error) {
@@ -53,7 +53,6 @@ export default function LoginPage() {
     }
     
     console.log('Login submitted:', loginData);
-    alert('Login successful!');
     setIsSubmitting(false);
   };
 

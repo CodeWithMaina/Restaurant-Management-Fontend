@@ -1,12 +1,10 @@
 import { Footer } from "../components/Footer"
-import Hero from "../components/home/Hero"
 import NavBar from "../components/NavBar"
 
-export const Home = () => {
+export const Contact = () => {
   return (
     <div>
         <NavBar/>
-        <Hero/>
         <Footer/>
     </div>
   )

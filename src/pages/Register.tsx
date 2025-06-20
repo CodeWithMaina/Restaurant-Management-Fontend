@@ -51,7 +51,7 @@ const Register: React.FC = () => {
     try {
       const res = await registerUser(transformedData).unwrap();
       console.log(res)
-      navigate('/login');
+      navigate('/home');
     } catch (error) {
       console.log("Failed to register",error)
     }

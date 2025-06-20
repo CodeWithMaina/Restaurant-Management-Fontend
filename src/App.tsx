@@ -9,8 +9,7 @@ import Register from "./pages/Register";
 import { Home } from "./pages/Home";
 import LoginPage from "./pages/Login";
 import { ProtectedRoute } from "./components/home/ProtectedRoute";
-import { About } from "./pages/About";
-import { Menu } from "./pages/Menu";
+import { Meal } from "./pages/Meal";
 import { Contact } from "./pages/Contact";
 
 function App() {
@@ -20,16 +19,12 @@ function App() {
       element: <Home />,
     },
     {
-      path: "/about",
-      element: <About />,
-    },
-    {
       path: "/contact",
       element: <Contact />,
     },
     {
-      path: "/menu",
-      element: <Menu />,
+      path: "/meals",
+      element: <Meal />,
     },
     {
       path: "/register",

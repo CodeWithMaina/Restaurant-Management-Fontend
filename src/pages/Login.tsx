@@ -44,7 +44,8 @@ export default function LoginPage() {
     };
 
     try {
-      const res = await loginUser(loginData);
+      const res = await loginUser(loginData).unwrap();
+
       // console.log(res)
       dispatch(setCredantials(res));
       navigate('/dashboard')

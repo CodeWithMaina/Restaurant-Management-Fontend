@@ -6,8 +6,7 @@ export const Footer = () => {
       <div className="h-px w-full bg-white"></div>
       <nav className="grid grid-flow-col gap-4">
                 <Link to="/">Home</Link>
-                <Link to="/about">About Us</Link>
-                <Link to="/menu">Menu</Link>
+                <Link to="/meals">Meals</Link>
                 <Link to="/contact">Contact</Link>
       </nav>
       <nav>

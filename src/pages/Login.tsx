@@ -47,12 +47,10 @@ export default function LoginPage() {
       const res = await loginUser(loginData).unwrap();
       dispatch(setCredantials(res));
       navigate('/dashboard');
-      toast.success("Login successful!"); // Success toast
+      toast.success("Login successful!");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log("Failed to Login", error);
-      
-      // Show error toast based on the error response
       if (error.status === 401) {
         toast.error(error.data?.error || "Invalid email or password");
       } else {
@@ -64,13 +62,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
       <Toaster richColors position="top-center" />
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 bg-white shadow-xl rounded-xl overflow-hidden">
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200">
         {/* Left Side */}
-        <div className="hidden md:flex flex-col justify-center bg-gradient-to-br from-gray-900 to-black text-white p-10">
+        <div className="hidden md:flex flex-col justify-center bg-black text-yellow-400 p-10">
           <h2 className="text-4xl font-bold mb-4">Design with us</h2>
-          <p className="text-sm">
+          <p className="text-gray-300 text-sm">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
             lobortis maximus nunc, ac rhoncus odio congue quis. Sed ac semper
             orci, eu porttitor lacus.
@@ -78,20 +76,14 @@ export default function LoginPage() {
         </div>
 
         {/* Right Side */}
-        <div className="p-10">
-          <div className="text-sm text-right">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-primary hover:underline">
-              Sign up
-            </Link>
-          </div>
+        <div className="p-10 bg-white">
 
-          <h2 className="text-3xl font-bold mb-8 mt-4 text-neutral">
+          <h2 className="text-3xl font-bold mb-8 mt-4 text-gray-800">
             Welcome Back 👋
           </h2>
 
-          <div className="space-y-3 mb-6 text-black">
-            <button className="btn btn-outline w-full gap-3">
+          <div className="space-y-3 mb-6">
+            <button className="btn w-full gap-3 bg-white text-gray-800 border border-gray-300 hover:bg-gray-50 hover:border-gray-400">
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
                 className="w-5 h-5"
@@ -99,7 +91,7 @@ export default function LoginPage() {
               />
               Sign in with Google
             </button>
-            <button className="btn btn-outline w-full gap-3">
+            <button className="btn w-full gap-3 bg-white text-gray-800 border border-gray-300 hover:bg-gray-50 hover:border-gray-400">
               <img
                 src="https://www.svgrepo.com/show/475689/twitter-color.svg"
                 className="w-5 h-5"
@@ -109,26 +101,26 @@ export default function LoginPage() {
             </button>
           </div>
 
-          <div className="divider text-sm text-neutral">OR</div>
+          <div className="divider text-sm text-gray-500 before:bg-gray-300 after:bg-gray-300">OR</div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text text-base-content font-medium">
+                <span className="label-text text-gray-700 font-medium">
                   Email Address
                 </span>
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
                 <input
                   type="email"
                   placeholder="chegep734@gmail.com"
                   {...register("email")}
-                  className="input input-bordered w-full pl-10"
+                  className="input w-full pl-10 border-gray-300 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
                 />
               </div>
               {errors.email && (
-                <p className="text-error text-sm mt-1">
+                <p className="text-red-500 text-sm mt-1">
                   {errors.email.message}
                 </p>
               )}
@@ -136,17 +128,17 @@ export default function LoginPage() {
 
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text text-base-content font-medium">
+                <span className="label-text text-gray-700 font-medium">
                   Password
                 </span>
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
                   {...register("password")}
-                  className="input input-bordered w-full pl-10 pr-10"
+                  className="input w-full pl-10 pr-10 border-gray-300 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
                 />
                 <button
                   type="button"
@@ -154,14 +146,14 @@ export default function LoginPage() {
                   className="absolute right-3 top-1/2 -translate-y-1/2"
                 >
                   {showPassword ? (
-                    <EyeOff className="w-5 h-5 text-gray-400" />
+                    <EyeOff className="w-5 h-5 text-gray-500" />
                   ) : (
-                    <Eye className="w-5 h-5 text-gray-400" />
+                    <Eye className="w-5 h-5 text-gray-500" />
                   )}
                 </button>
               </div>
               {errors.password && (
-                <p className="text-error text-sm mt-1">
+                <p className="text-red-500 text-sm mt-1">
                   {errors.password.message}
                 </p>
               )}
@@ -169,10 +161,10 @@ export default function LoginPage() {
 
             <div className="flex justify-between items-center">
               <label className="cursor-pointer label gap-2">
-                <input type="checkbox" className="checkbox checkbox-primary checkbox-sm" />
-                <span className="label-text text-sm">Remember me</span>
+                <input type="checkbox" className="checkbox checkbox-sm border-gray-300 checked:border-yellow-400 [--chkbg:theme(colors.yellow.400)] [--chkfg:black]" />
+                <span className="label-text text-sm text-gray-600">Remember me</span>
               </label>
-              <Link to="/forgot-password" className="label-text-alt text-primary hover:underline">
+              <Link to="/forgot-password" className="label-text-alt text-yellow-400 hover:underline font-medium">
                 Forgot password?
               </Link>
             </div>
@@ -180,14 +172,14 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn btn-primary w-full text-white tracking-wide"
+              className="btn w-full bg-black text-yellow-400 hover:bg-gray-900 tracking-wide font-medium"
             >
               {isSubmitting ? 'Signing in...' : 'Sign in'}
             </button>
 
-            <div className="text-center text-sm mt-6 text-neutral">
+            <div className="text-center text-sm mt-6 text-gray-600">
               Don't have an account?{" "}
-              <Link to="/register" className="text-primary hover:underline">
+              <Link to="/register" className="text-yellow-400 hover:underline font-medium">
                 Sign up
               </Link>
             </div>

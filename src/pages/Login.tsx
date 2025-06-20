@@ -8,6 +8,7 @@ import { userApi } from "../features/api/userApi";
 import { useDispatch } from "react-redux";
 import { setCredantials } from "../features/auth/authSlice";
 import { useNavigate } from "react-router";
+import { toast, Toaster } from "sonner";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -37,7 +38,6 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginFormData) => {
     setIsSubmitting(true);
     
-    // Transform data to match your required structure
     const loginData = {
       email: data.email,
       password: data.password
@@ -45,20 +45,27 @@ export default function LoginPage() {
 
     try {
       const res = await loginUser(loginData).unwrap();
-
-      // console.log(res)
       dispatch(setCredantials(res));
-      navigate('/dashboard')
-    } catch (error) {
-      console.log("Failed to Login",error)
+      navigate('/dashboard');
+      toast.success("Login successful!"); // Success toast
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log("Failed to Login", error);
+      
+      // Show error toast based on the error response
+      if (error.status === 401) {
+        toast.error(error.data?.error || "Invalid email or password");
+      } else {
+        toast.error("An error occurred during login. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    console.log('Login submitted:', loginData);
-    setIsSubmitting(false);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 p-6">
+      <Toaster richColors position="top-center" />
       <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 bg-white shadow-xl rounded-xl overflow-hidden">
         {/* Left Side */}
         <div className="hidden md:flex flex-col justify-center bg-gradient-to-br from-gray-900 to-black text-white p-10">

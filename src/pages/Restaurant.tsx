@@ -1,8 +1,8 @@
 import { Footer } from "../components/Footer";
-import MealMenu from "../components/meals/MealMenu";
+import MealMenu from "../components/restaurant/MealMenu";
 import NavBar from "../components/NavBar";
 
-export const Meal = () => {
+export const Restaurant = () => {
   return (
     <div>
       <NavBar />

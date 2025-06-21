@@ -1,31 +1,35 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userApi } from "../features/api/userApi";
-import storage from 'redux-persist/lib/storage';
+import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import authReducer from "../features/auth/authSlice";
-
+import { menuItemApi } from "../features/api/menuItemApi";
+import { categoryApi } from "../features/api/categoryApi";
 
 // Create a persist config for AuthState
 const authPersistConfig = {
-    key:'auth',
-    storage,
-    whitelist:['user','token','isAuthenticated','userType']
-}
+  key: "auth",
+  storage,
+  whitelist: ["user", "token", "isAuthenticated", "userType"],
+};
 
 //Create a persistenet reducer for auth
-const persistAuthReducer = persistReducer(authPersistConfig,authReducer);
+const persistAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
-    reducer: {
-        [userApi.reducerPath]: userApi.reducer,
-        //Use the persisted reducer
-        auth: persistAuthReducer
-    },
+  reducer: {
+    [userApi.reducerPath]: userApi.reducer,
+    [menuItemApi.reducerPath]: menuItemApi.reducer,
+    [categoryApi.reducerPath]: categoryApi.reducer,
+    //Use the persisted reducer
+    auth: persistAuthReducer,
+  },
 
-    middleware:(defaultMiddleware)=>defaultMiddleware({
-        serializableCheck: false,
-    }).concat(userApi.middleware)
-})
+  middleware: (defaultMiddleware) =>
+    defaultMiddleware({
+      serializableCheck: false,
+    }).concat(userApi.middleware, menuItemApi.middleware, categoryApi.middleware),
+});
 
 // Export the persisted store
 export const persistor = persistStore(store);

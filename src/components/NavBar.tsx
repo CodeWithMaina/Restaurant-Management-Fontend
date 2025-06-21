@@ -22,19 +22,19 @@ const NavBar = () => {
 
   const navItems = [
     { path: "/", name: "Home" },
-    { path: "/meals", name: "Meals" },
+    { path: "/restaurant", name: "The Restaurant" },
     { path: "/contact", name: "Contact" },
   ];
 
   const mobileNavItems = [
     { path: "/", name: "Home" },
     { path: "/about", name: "About Us" },
-    { path: "/meals", name: "Meals" },
+    { path: "/restaurant", name: "The Restaurant" },
     { path: "/contact", name: "Contact" },
   ];
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100 }}
@@ -43,11 +43,11 @@ const NavBar = () => {
       {/* Mobile Menu */}
       <div className="navbar-start">
         <div className="dropdown">
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            tabIndex={0} 
-            role="button" 
+            tabIndex={0}
+            role="button"
             className="btn btn-ghost lg:hidden"
           >
             <svg
@@ -74,13 +74,13 @@ const NavBar = () => {
             className="menu menu-sm dropdown-content bg-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             {mobileNavItems.map((item, index) => (
-              <motion.li 
+              <motion.li
                 key={item.path}
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Link 
+                <Link
                   to={item.path}
                   className="text-white hover:bg-yellow-400 hover:text-black transition-colors"
                 >
@@ -90,7 +90,7 @@ const NavBar = () => {
             ))}
           </motion.ul>
         </div>
-        <motion.a 
+        <motion.a
           whileHover={{ scale: 1.05 }}
           className="btn btn-ghost text-xl text-yellow-400"
         >
@@ -99,10 +99,10 @@ const NavBar = () => {
       </div>
 
       {/* Desktop Menu */}
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+      <div className="navbar-center hidden lg:flex items-center">
+        <ul className="menu menu-horizontal gap-2 px-1">
           {navItems.map((item, index) => (
-            <motion.li 
+            <motion.li
               key={item.path}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -110,9 +110,13 @@ const NavBar = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Link 
+              <Link
                 to={item.path}
-                className="text-white hover:bg-yellow-400 hover:text-black transition-colors"
+                className={`${
+                  item.name === "The Restaurant"
+                    ? "badge badge-outline badge-warning hover:badge-warning text-2xl py-5 px-3"
+                    : "text-white hover:bg-yellow-400 hover:text-black transition-colors"
+                }transition-colors`}
               >
                 {item.name}
               </Link>
@@ -124,23 +128,23 @@ const NavBar = () => {
       {/* Auth Buttons */}
       <AnimatePresence>
         {!isAuthenticated ? (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="navbar-end gap-2"
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                className="btn bg-yellow-400 text-black hover:bg-yellow-500 border-none" 
+              <Link
+                className="btn bg-yellow-400 text-black hover:bg-yellow-500 border-none"
                 to="/login"
               >
                 Login
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                className="btn bg-gray-800 text-yellow-400 hover:bg-gray-700 border-none" 
+              <Link
+                className="btn bg-gray-800 text-yellow-400 hover:bg-gray-700 border-none"
                 to="/contact"
               >
                 Sign Up
@@ -148,20 +152,20 @@ const NavBar = () => {
             </motion.div>
           </motion.div>
         ) : (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="dropdown navbar-end dropdown-start"
           >
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              tabIndex={0} 
-              role="button" 
+              tabIndex={0}
+              role="button"
               className="btn bg-yellow-400 text-black border-none hover:bg-yellow-500"
             >
-              {user?.userName || "Profile" }
+              {user?.userName || "Profile"}
             </motion.div>
             <motion.ul
               initial={{ opacity: 0, y: -10 }}
@@ -171,23 +175,23 @@ const NavBar = () => {
               tabIndex={0}
               className="dropdown-content menu bg-gray-800 rounded-box z-[1] w-52 shadow-sm"
             >
-              <motion.li 
+              <motion.li
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Link 
-                  className="text-white hover:bg-yellow-400 hover:text-black transition-colors" 
+                <Link
+                  className="text-white hover:bg-yellow-400 hover:text-black transition-colors"
                   to="/dashboard/dash"
                 >
                   DashBoard
                 </Link>
               </motion.li>
-              <motion.li 
+              <motion.li
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <button 
-                  className="text-white hover:bg-yellow-400 hover:text-black transition-colors" 
+                <button
+                  className="text-white hover:bg-yellow-400 hover:text-black transition-colors"
                   onClick={handleLogOut}
                 >
                   Log Out

@@ -1,18 +1,17 @@
-import { Outlet } from "react-router"
-import Card from "./Card"
-import { SideNav } from "./SideNav"
+// Layout.tsx
+import { Outlet } from "react-router-dom";
+import Card from "./Card";
+import { SideNav } from "./SideNav";
 
 export const Layout = () => {
   return (
-    <div className="flex">
-        <div className="min-w-[20%]">
-          <SideNav/>
-        </div>
-        <div className="min-w-80% h-fit">
-            <Card>
-              <Outlet/>
-            </Card>
-        </div>
+    <div className="flex h-screen">
+      <SideNav />
+      <div className="flex-1 p-1 bg-gray-100">
+        <Card>
+          <Outlet />
+        </Card>
+      </div>
     </div>
-    )
-}
+  );
+};

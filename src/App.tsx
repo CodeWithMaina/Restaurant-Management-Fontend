@@ -1,16 +1,16 @@
 import "./App.css";
-import Dashboard from "./components/dashboard/Overview";
 import { Profile } from "./components/dashboard/Profile";
-import { Restaurant } from "./components/dashboard/Restaurant";
-import { Setting } from "./components/dashboard/Setting";
 import { DashBoard } from "./pages/DashBoard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./pages/Register";
 import { Home } from "./pages/Home";
 import LoginPage from "./pages/Login";
 import { ProtectedRoute } from "./components/home/ProtectedRoute";
-import { Meal } from "./pages/Meal";
 import { Contact } from "./pages/Contact";
+import { Restaurant } from "./pages/Restaurant";
+import { Comment } from "./components/dashboard/Comment";
+import { Food } from "./components/dashboard/Food";
+import { Overview } from "./components/dashboard/Overview";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,8 +23,8 @@ function App() {
       element: <Contact />,
     },
     {
-      path: "/meals",
-      element: <Meal />,
+      path: "/restaurant",
+      element: <Restaurant />,
     },
     {
       path: "/register",
@@ -35,7 +35,7 @@ function App() {
       element: <LoginPage />,
     },
     {
-      path: "/dashboard",
+      path: "/owner",
       element: (
         <ProtectedRoute>
           <DashBoard />
@@ -43,20 +43,20 @@ function App() {
       ),
       children: [
         {
-          path: "restaurant",
-          element: <Restaurant />,
+          path: "dashboard",
+          element: <Overview />,
         },
         {
-          path: "dash",
-          element: <Dashboard />,
+          path: "food",
+          element: <Food />,
         },
         {
           path: "profile",
           element: <Profile />,
         },
         {
-          path: "settings",
-          element: <Setting />,
+          path: "comments",
+          element: <Comment />,
         },
       ],
     },

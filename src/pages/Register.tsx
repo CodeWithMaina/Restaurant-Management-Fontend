@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Eye, EyeOff, Lock, Mail, User, Phone, UserCheck, Facebook, Twitter, Github } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
-import { userApi } from '../features/api/userApi';
+import { authApi } from '../features/api/authApi';
 import { toast } from 'sonner';
 
 const signUpSchema = z.object({
@@ -36,7 +36,7 @@ const Register: React.FC = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const [registerUser] = userApi.useRegisterUserMutation({})
+  const [registerUser] = authApi.useRegisterUserMutation({})
 
   const onSubmit = async (data: SignUpFormData) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));

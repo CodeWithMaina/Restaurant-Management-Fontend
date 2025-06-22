@@ -181,7 +181,7 @@ const NavBar = () => {
               >
                 <Link
                   className="text-white hover:bg-yellow-400 hover:text-black transition-colors"
-                  to="/dashboard/dash"
+                  to="/owner/dashboard"
                 >
                   DashBoard
                 </Link>

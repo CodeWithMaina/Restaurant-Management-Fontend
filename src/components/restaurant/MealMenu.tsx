@@ -22,7 +22,7 @@ const MealMenu: React.FC = () => {
   const { data: menuItemData, isLoading, isError } = menuItemApi.useFetchMenuItemQuery();
   const {data: categoryData, isLoading: isCategoryLoading, isError: isCategoryError} = categoryApi.useFetchCategoryQuery();
 
-  console.log(categoryData)
+  // console.log(categoryData)
   if (isLoading || isCategoryLoading) {
     return (<div > <Loading/> </div>);
   }

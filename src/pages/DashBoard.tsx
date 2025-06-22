@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar";
-import { Layout } from "../dashboardDesign/Layout";
+import { Layout } from "../DashboardDesign/Layout";
 
 export const DashBoard = () => {
   return (

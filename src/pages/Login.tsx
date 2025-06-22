@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
-import { userApi } from "../features/api/userApi";
+import { authApi } from "../features/api/authApi";
 import { useDispatch } from "react-redux";
 import { setCredantials } from "../features/auth/authSlice";
 import { useNavigate } from "react-router";
@@ -23,9 +23,9 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [loginUser] = userApi.useLoginUserMutation({});
+  const [loginUser] = authApi.useLoginUserMutation({});
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     register,
@@ -46,7 +46,7 @@ export default function LoginPage() {
     try {
       const res = await loginUser(loginData).unwrap();
       dispatch(setCredantials(res));
-      navigate('/dashboard');
+      navigate('/owner/dashboard');
       toast.success("Login successful!");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

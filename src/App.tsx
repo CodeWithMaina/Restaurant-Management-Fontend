@@ -1,5 +1,5 @@
 import "./App.css";
-import { Profile } from "./components/dashboard/Profile";
+import { Profile } from "./components/RestaurantOwnerDashboard/Profile";
 import { DashBoard } from "./pages/DashBoard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./pages/Register";
@@ -8,9 +8,9 @@ import LoginPage from "./pages/Login";
 import { ProtectedRoute } from "./components/home/ProtectedRoute";
 import { Contact } from "./pages/Contact";
 import { Restaurant } from "./pages/Restaurant";
-import { Comment } from "./components/dashboard/Comment";
-import { Food } from "./components/dashboard/Food";
-import { Overview } from "./components/dashboard/Overview";
+import { Comment } from "./components/RestaurantOwnerDashboard/Comment";
+import { Food } from "./components/RestaurantOwnerDashboard/Food";
+import { Overview } from "./components/RestaurantOwnerDashboard/Overview";
 
 function App() {
   const router = createBrowserRouter([

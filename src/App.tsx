@@ -1,5 +1,4 @@
 import "./App.css";
-import { Profile } from "./dashboards/RestaurantOwnerDashboard/Profile";
 import { DashBoard } from "./pages/DashBoard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./pages/Register";
@@ -13,6 +12,10 @@ import { Food } from "./dashboards/RestaurantOwnerDashboard/Food";
 import { Overview } from "./dashboards/RestaurantOwnerDashboard/Overview";
 import PasswordReset from "./pages/PasswordReset";
 import { CategoryItemsPage } from "./pages/CategoryItemsPage";
+import { Profile } from "./dashboards/Profile";
+import { Cart } from "./dashboards/CustomerDashboard/Cart";
+import { Orders } from "./dashboards/CustomerDashboard/Orders";
+import { CustomerDashBoard } from "./pages/CustomerDashboard";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,10 +27,10 @@ function App() {
       path: "/contact",
       element: <Contact />,
     },
-    {
-      path: "/restaurant",
-      element: <Restaurant />,
-    },
+    // {
+    //   path: "/restaurant",
+    //   element: <Restaurant />,
+    // },
     {
       path: "/category-items",
       element: <CategoryItemsPage />,
@@ -67,6 +70,32 @@ function App() {
         {
           path: "comments",
           element: <Comment />,
+        },
+      ],
+    },
+    {
+      path: "/restaurant",
+      element: (
+        <ProtectedRoute>
+          <CustomerDashBoard />
+        </ProtectedRoute>
+      ),
+      children: [
+        {
+          path: "food",
+          element: <Restaurant />,
+        },
+        {
+          path: "cart",
+          element: <Cart />,
+        },
+        {
+          path: "orders",
+          element: <Orders />,
+        },
+        {
+          path: "profile",
+          element: <Profile />,
         },
       ],
     },

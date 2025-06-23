@@ -13,10 +13,10 @@ import {
   Plus,
   Trash2,
 } from "lucide-react";
-import { userApi } from "../../features/api/userApi";
-import type { RootState } from "../../app/store";
-import { Loading } from "../../components/Loading";
-import type { TAddress } from "../../types/user.types";
+import type { RootState } from "../app/store";
+import { userApi } from "../features/api/userApi";
+import { Loading } from "../components/Loading";
+import type { TAddress } from "../types/user.types";
 
 type FormData = {
   name: string;

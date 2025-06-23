@@ -17,6 +17,7 @@ const MealMenu: React.FC = () => {
     isLoading,
     isError,
   } = menuItemApi.useFetchMenuItemQuery();
+
   const {
     data: categoryData,
     isLoading: isCategoryLoading,
@@ -27,7 +28,11 @@ const MealMenu: React.FC = () => {
     navigate(`/category-items?id=${categoryId}`)
       };
 
-  // console.log(categoryData)
+  // Handle add to cart
+  // const handleAddToCart = (id: number, name: string, price: number | string) =>{
+  //   console.log("Dish data:", name, price, id);
+  // }
+
   if (isLoading || isCategoryLoading) {
     return (
       <div>
@@ -77,8 +82,8 @@ const MealMenu: React.FC = () => {
               category={dish.category.name}
               restaurantName={dish.restaurant.name}
               ingredients={dish.ingredients}
-              active={dish.active}
-            />
+              active={dish.active} 
+              />
           ))}
         </div>
       </MealSection>

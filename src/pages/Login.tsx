@@ -12,9 +12,7 @@ import { toast, Toaster } from "sonner";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
-  password: z
-    .string()
-    .min(1, { message: "Password is required" }),
+  password: z.string().min(1, { message: "Password is required" }),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -37,18 +35,29 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginFormData) => {
     setIsSubmitting(true);
-    
+
     const loginData = {
       email: data.email,
-      password: data.password
+      password: data.password,
     };
 
     try {
       const res = await loginUser(loginData).unwrap();
-      dispatch(setCredantials(res));
-      navigate('/owner/dashboard');
-      toast.success("Login successful!");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+      if (res?.userType === "customer") {
+        dispatch(setCredantials(res));
+        navigate("/restaurant/food");
+        toast.success(`Welcome, ${res?.userName}`);
+      } else if (res?.userType === "admin") {
+        dispatch(setCredantials(res));
+        navigate("/owner/dashboard");
+        toast.success(`Welcome, ${res?.userName}`);
+      } else {
+        navigate("/");
+        toast.success("Welcome to our Restaurant");
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log("Failed to Login", error);
       if (error.status === 401) {
@@ -77,7 +86,6 @@ export default function LoginPage() {
 
         {/* Right Side */}
         <div className="p-10 bg-white">
-
           <h2 className="text-3xl font-bold mb-8 mt-4 text-gray-800">
             Welcome Back 👋
           </h2>
@@ -101,7 +109,9 @@ export default function LoginPage() {
             </button>
           </div>
 
-          <div className="divider text-sm text-gray-500 before:bg-gray-300 after:bg-gray-300">OR</div>
+          <div className="divider text-sm text-gray-500 before:bg-gray-300 after:bg-gray-300">
+            OR
+          </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="form-control w-full">
@@ -135,7 +145,7 @@ export default function LoginPage() {
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   {...register("password")}
                   className="input w-full pl-10 pr-10 border-gray-300 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
@@ -161,10 +171,18 @@ export default function LoginPage() {
 
             <div className="flex justify-between items-center">
               <label className="cursor-pointer label gap-2">
-                <input type="checkbox" className="checkbox checkbox-sm border-gray-300 checked:border-yellow-400 [--chkbg:theme(colors.yellow.400)] [--chkfg:black]" />
-                <span className="label-text text-sm text-gray-600">Remember me</span>
+                <input
+                  type="checkbox"
+                  className="checkbox checkbox-sm border-gray-300 checked:border-yellow-400 [--chkbg:theme(colors.yellow.400)] [--chkfg:black]"
+                />
+                <span className="label-text text-sm text-gray-600">
+                  Remember me
+                </span>
               </label>
-              <Link to="/forgot-password" className="label-text-alt text-yellow-400 hover:underline font-medium">
+              <Link
+                to="/forgot-password"
+                className="label-text-alt text-yellow-400 hover:underline font-medium"
+              >
                 Forgot password?
               </Link>
             </div>
@@ -174,12 +192,15 @@ export default function LoginPage() {
               disabled={isSubmitting}
               className="btn w-full bg-black text-yellow-400 hover:bg-gray-900 tracking-wide font-medium"
             >
-              {isSubmitting ? 'Signing in...' : 'Sign in'}
+              {isSubmitting ? "Signing in..." : "Sign in"}
             </button>
 
             <div className="text-center text-sm mt-6 text-gray-600">
               Don't have an account?{" "}
-              <Link to="/register" className="text-yellow-400 hover:underline font-medium">
+              <Link
+                to="/register"
+                className="text-yellow-400 hover:underline font-medium"
+              >
                 Sign up
               </Link>
             </div>

@@ -1,37 +1,46 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authApi } from "../features/api/authApi";
 import storage from "redux-persist/lib/storage";
-import { persistReducer, persistStore } from "redux-persist";
+import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import authReducer from "../features/auth/authSlice";
 import { menuItemApi } from "../features/api/menuItemApi";
 import { categoryApi } from "../features/api/categoryApi";
 import { userApi } from "../features/api/userApi";
 import { restaurantApi } from "../features/api/restaurantApi";
+import cartReducer from "../features/cart/cartSlice";
 
-// Create a persist config for AuthState
+// Persist configs
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["user", "token", "isAuthenticated", "userType"],
+  whitelist: ["user", "token", "isAuthenticated", "userType", "restaurantId"],
 };
 
-//Create a persistenet reducer for auth
+const cartPersistConfig = {
+  key: "cart",
+  storage,
+  whitelist: ["items", "totalQuantity", "totalAmount"],
+};
+
+// Create persisted reducers
 const persistAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 export const store = configureStore({
   reducer: {
+    cart: persistCartReducer, // Use persisted cart reducer
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [restaurantApi.reducerPath]: restaurantApi.reducer,
     [menuItemApi.reducerPath]: menuItemApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
-    //Use the persisted reducer
     auth: persistAuthReducer,
   },
-
-  middleware: (defaultMiddleware) =>
-    defaultMiddleware({
-      serializableCheck: false,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
     }).concat(
       authApi.middleware,
       userApi.middleware,
@@ -41,8 +50,6 @@ export const store = configureStore({
     ),
 });
 
-// Export the persisted store
 export const persistor = persistStore(store);
-
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

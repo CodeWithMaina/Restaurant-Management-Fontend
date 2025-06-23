@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar";
-import { Layout } from "../dashboards/RestaurantOwnerDashboardDesign/Layout";
+import { Layout } from "../dashboards/CustomerDashboardDesign/Layout";
 
-export const DashBoard = () => {
+export const CustomerDashBoard = () => {
   return (
     <div>
       <NavBar />

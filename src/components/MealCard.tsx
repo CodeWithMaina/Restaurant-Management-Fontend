@@ -1,5 +1,7 @@
 import React from "react";
 import { Check, X } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../features/cart/cartSlice";
 
 interface MealCardProps {
   id: number;
@@ -14,6 +16,7 @@ interface MealCardProps {
 }
 
 const MealCard: React.FC<MealCardProps> = ({
+  id,
   title,
   description,
   price,
@@ -23,8 +26,18 @@ const MealCard: React.FC<MealCardProps> = ({
   ingredients,
   active = true,
 }) => {
-  const priceValue = typeof price === "string" ? parseFloat(price) : price;
+  const dispatch = useDispatch();
 
+   const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
+
+  const handleAddToCart = () => {
+    dispatch(addItemToCart({
+      id,
+      name: title,
+      price: numericPrice,
+      imageUrl: imageUrl || undefined,
+    }));
+  };
   return (
     <div
       className={`bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
@@ -73,7 +86,7 @@ const MealCard: React.FC<MealCardProps> = ({
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-xl font-bold text-gray-900">{title}</h3>
           <span className="text-2xl font-bold text-black">
-            ${priceValue.toFixed(2)}
+            ${numericPrice.toFixed(2)}
           </span>
         </div>
 
@@ -96,7 +109,8 @@ const MealCard: React.FC<MealCardProps> = ({
         )}
 
         <button
-          className={`w-full bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors ${
+          onClick={() => handleAddToCart()}
+          className={`btn w-full bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors ${
             !active ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={!active}

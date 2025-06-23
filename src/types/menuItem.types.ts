@@ -1,9 +1,11 @@
 // Define types for nested objects
 interface Category {
+  id: number;
   name: string;
 }
 
 interface Restaurant {
+  id: number;
   name: string;
   streetAddress: string;
   zipCode: string;
@@ -26,14 +28,14 @@ export interface MenuItem {
   categoryId: number;
   createdAt: string; 
   description: string;
-  id: number;
+  id:number;
   ingredients: string;
   name: string;
   orderItems: OrderItem[];
-  price: string; // or number if converted
+  price: number;
   restaurant: Restaurant;
   restaurantId: number;
-  updatedAt: string; // ISO date string
+  updatedAt: string; 
   imageUrl?: string | null;
 }
 

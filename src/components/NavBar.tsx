@@ -22,7 +22,7 @@ const NavBar = () => {
 
   const navItems = [
     { path: "/", name: "Home" },
-    { path: "/restaurant", name: "The Restaurant" },
+    { path: "/restaurant/food", name: "The Restaurant" },
     { path: "/contact", name: "Contact" },
   ];
 
@@ -151,7 +151,7 @@ const NavBar = () => {
               </Link>
             </motion.div>
           </motion.div>
-        ) : (
+        ) : user.userType === "admin" ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -199,6 +199,46 @@ const NavBar = () => {
               </motion.li>
             </motion.ul>
           </motion.div>
+        ) : (
+          <div className="navbar-end">
+            <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="dropdown navbar-end dropdown-start"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              tabIndex={0}
+              role="button"
+              className="btn bg-yellow-400 text-black border-none hover:bg-yellow-500"
+            >
+              {user?.userName || "Profile"}
+            </motion.div>
+            <motion.ul
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              tabIndex={0}
+              className="dropdown-content menu bg-gray-800 rounded-box z-[1] w-52 shadow-sm"
+            >
+            
+              <motion.li
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <button
+                  className="text-white hover:bg-yellow-400 hover:text-black transition-colors"
+                  onClick={handleLogOut}
+                >
+                  Log Out
+                </button>
+              </motion.li>
+            </motion.ul>
+          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </motion.div>

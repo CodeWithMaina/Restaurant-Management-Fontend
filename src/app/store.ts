@@ -6,6 +6,7 @@ import authReducer from "../features/auth/authSlice";
 import { menuItemApi } from "../features/api/menuItemApi";
 import { categoryApi } from "../features/api/categoryApi";
 import { userApi } from "../features/api/userApi";
+import { restaurantApi } from "../features/api/restaurantApi";
 
 // Create a persist config for AuthState
 const authPersistConfig = {
@@ -21,6 +22,7 @@ export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [restaurantApi.reducerPath]: restaurantApi.reducer,
     [menuItemApi.reducerPath]: menuItemApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     //Use the persisted reducer
@@ -34,7 +36,8 @@ export const store = configureStore({
       authApi.middleware,
       userApi.middleware,
       menuItemApi.middleware,
-      categoryApi.middleware
+      categoryApi.middleware,
+      restaurantApi.middleware
     ),
 });
 

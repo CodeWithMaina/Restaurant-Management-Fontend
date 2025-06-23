@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { userApi } from "../../features/api/userApi";
 import type { RootState } from "../../app/store";
-import { Loading } from "../Loading";
+import { Loading } from "../../components/Loading";
 import type { TAddress } from "../../types/user.types";
 
 type FormData = {

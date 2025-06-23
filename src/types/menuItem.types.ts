@@ -24,7 +24,7 @@ export interface MenuItem {
   active: boolean;
   category: Category;
   categoryId: number;
-  createdAt: string; // ISO date string
+  createdAt: string; 
   description: string;
   id: number;
   ingredients: string;

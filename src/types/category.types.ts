@@ -1,6 +1,6 @@
 
 
-interface TMenuItem {
+export interface TMenuItem {
     id: number;
     name: string;
     description: string;
@@ -8,7 +8,7 @@ interface TMenuItem {
     active: boolean
 }
 
-interface TCategory {
+export interface TCategory {
     id: number;
     name: string;
     menuItems: TMenuItem[];

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Profile } from "./components/RestaurantOwnerDashboard/Profile";
+import { Profile } from "./dashboards/RestaurantOwnerDashboard/Profile";
 import { DashBoard } from "./pages/DashBoard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./pages/Register";
@@ -8,9 +8,11 @@ import LoginPage from "./pages/Login";
 import { ProtectedRoute } from "./components/home/ProtectedRoute";
 import { Contact } from "./pages/Contact";
 import { Restaurant } from "./pages/Restaurant";
-import { Comment } from "./components/RestaurantOwnerDashboard/Comment";
-import { Food } from "./components/RestaurantOwnerDashboard/Food";
-import { Overview } from "./components/RestaurantOwnerDashboard/Overview";
+import { Comment } from "./dashboards/RestaurantOwnerDashboard/Comment";
+import { Food } from "./dashboards/RestaurantOwnerDashboard/Food";
+import { Overview } from "./dashboards/RestaurantOwnerDashboard/Overview";
+import PasswordReset from "./pages/PasswordReset";
+import { CategoryItemsPage } from "./pages/CategoryItemsPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,12 +29,20 @@ function App() {
       element: <Restaurant />,
     },
     {
+      path: "/category-items",
+      element: <CategoryItemsPage />,
+    },
+    {
       path: "/register",
       element: <Register />,
     },
     {
       path: "/login",
       element: <LoginPage />,
+    },
+    {
+      path: "/forgot-password",
+      element: <PasswordReset />,
     },
     {
       path: "/owner",

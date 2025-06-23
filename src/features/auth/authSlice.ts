@@ -7,6 +7,7 @@ interface AuthSate {
   userName: string | null;
   isAuthenticated: boolean;
   userType: string | null;
+  restaurantId: number | null;
 }
 
 const initialState: AuthSate = {
@@ -15,6 +16,7 @@ const initialState: AuthSate = {
   userName: null,
   isAuthenticated: false,
   userType: null,
+  restaurantId:null
 };
 
 const authSlice = createSlice({
@@ -29,6 +31,7 @@ const authSlice = createSlice({
         userName: string | null;
         token: string;
         userType: string | null;
+        restaurantId?: number | null;
       }>
     ) => {
       state.user = action.payload;
@@ -36,6 +39,7 @@ const authSlice = createSlice({
       state.userName = action.payload.userName;
       state.userType = action.payload.userType;
       state.isAuthenticated = true;
+      state.restaurantId = action.payload.restaurantId || null;
     },
     clearCreadentials: (state) => {
       state.user = null;
@@ -43,6 +47,7 @@ const authSlice = createSlice({
       state.userName = null;
       state.userType = null;
       state.isAuthenticated = false;
+      state.restaurantId = null;
     },
   },
 });

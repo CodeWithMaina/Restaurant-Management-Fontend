@@ -16,6 +16,7 @@ import { Profile } from "./dashboards/Profile";
 import { Cart } from "./dashboards/CustomerDashboard/Cart";
 import { Orders } from "./dashboards/CustomerDashboard/Orders";
 import { CustomerDashBoard } from "./pages/CustomerDashboard";
+import { RestaurantOrders } from "./dashboards/RestaurantOwnerDashboard/RestaurantOrders";
 
 function App() {
   const router = createBrowserRouter([
@@ -62,6 +63,10 @@ function App() {
         {
           path: "food",
           element: <Food />,
+        },
+        {
+          path: "restaurant-orders",
+          element: <RestaurantOrders />,
         },
         {
           path: "profile",

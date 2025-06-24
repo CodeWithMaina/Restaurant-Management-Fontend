@@ -23,6 +23,7 @@ export const RestaurantOwnerSideNav = () => {
     { name: "Overview", path: "/owner/dashboard", icon: "📊" },
     { name: "Food", path: "/owner/food", icon: "🍔" },
     { name: "Comments", path: "/owner/comments", icon: "💬" },
+    { name: "Orders History", path: "/owner/restaurant-orders", icon: "📊" },
     { name: "Profile", path: "/owner/profile", icon: "👤" },
   ];
 

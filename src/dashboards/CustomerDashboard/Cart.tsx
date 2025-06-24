@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../app/store";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import Swal from "sweetalert2";
-import { decreaseItemQuantity, deleteItemFromCart, increaseItemQuantity } from "../../features/cart/cartSlice";
+import { decreaseItemQuantity, deleteItemFromCart, increaseItemQuantity, type CartItem } from "../../features/cart/cartSlice";
 import { useNavigate } from "react-router";
 
 export const Cart = () => {
@@ -43,8 +43,31 @@ export const Cart = () => {
     });
   };
 
+  const handleOrderCheckout = (items:CartItem[]) => {
+    Swal.fire({
+      title: "Confirm",
+      text: "You wanna order, for real",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#f59e0b",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, for sure!",
+      background: "#1f2937",
+      color: "#ffffff",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(items)
+        // Add current user id
+        // assign a driver
+        //delivery address of the currrent user
+      toast.success('Niiiiice, you are my G');
+    }
+    });
+  }
+
   return (
     <div className="p-4 bg-base-100 min-h-screen">
+      <Toaster richColors top-right/>
       <h2 className="text-2xl font-bold mb-4 text-white">Your Cart</h2>
       
       {items.length === 0 ? (
@@ -120,7 +143,7 @@ export const Cart = () => {
               <button onClick={() => navigate('/restaurant/food')} className="btn btn-outline text-gray-300 hover:bg-base-300">
                 Continue Shopping
               </button>
-              <button className="btn bg-yellow-400 text-black hover:bg-yellow-500">
+              <button onClick={()=>handleOrderCheckout(items)} className="btn bg-yellow-400 text-black hover:bg-yellow-500">
                 Checkout
               </button>
             </div>

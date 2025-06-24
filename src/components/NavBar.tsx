@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import type { RootState } from "../app/store";
 import { clearCreadentials } from "../features/auth/authSlice";
 import { motion, AnimatePresence } from "framer-motion";
+import { clearCart } from "../features/cart/cartSlice";
 
 const NavBar = () => {
   const { isAuthenticated, user } = useSelector(
@@ -14,6 +15,7 @@ const NavBar = () => {
   const handleLogOut = async () => {
     try {
       await dispatch(clearCreadentials());
+      await dispatch(clearCart())
       navigate("/login");
     } catch (error) {
       console.log("Log Out Failed", error);

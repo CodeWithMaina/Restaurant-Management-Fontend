@@ -20,6 +20,7 @@ type OrderItem = {
 };
 
 export type MenuItem = {
+  imageUrl: string | null | undefined;
   id: number;
   name: string;
   restaurantId: number;

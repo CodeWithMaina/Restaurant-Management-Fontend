@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../app/store";
 import { orderApi, type Order } from "../../features/api/ordersApi";
-import { Loader2, AlertCircle, ChevronDown, ChevronUp, Edit, Trash2, Check, X, Truck, Clock, Ban } from "lucide-react";
+import { AlertCircle, ChevronDown, ChevronUp, Edit, Trash2, Check, X, Truck, Clock, Ban } from "lucide-react";
 import { toast } from "sonner";
+import { Loading } from "../../components/Loading";
 
 export const RestaurantOrders = () => {
   const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
@@ -69,13 +70,7 @@ export const RestaurantOrders = () => {
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
+  if (isLoading){<Loading/>};
 
   if (isError) {
     return (

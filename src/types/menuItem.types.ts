@@ -1,43 +1,54 @@
-// Define types for nested objects
-interface Category {
-  id: number;
-  name: string;
-}
-
-interface Restaurant {
-  id: number;
+type Restaurant = {
   name: string;
   streetAddress: string;
   zipCode: string;
   cityId: number;
-}
+};
 
-interface OrderItem {
-  comment: string | null; // Assuming comment can be null if not provided
-  itemPrice: string; // or number if converted
-  menuItemId: number;
-  orderId: number;
-  price: string; // or number if converted
-  quantity: number;
-}
-
-// Main MenuItem type
-export interface MenuItem {
-  active: boolean;
-  category: Category;
-  categoryId: number;
-  createdAt: string; 
-  description: string;
-  id:number;
-  ingredients: string;
+export type Category = {
+  id: number;
   name: string;
-  orderItems: OrderItem[];
-  price: number;
-  restaurant: Restaurant;
-  restaurantId: number;
-  updatedAt: string; 
-  imageUrl?: string | null;
-}
+};
 
-// The response type is an array of MenuItems
+type OrderItem = {
+  orderId: number;
+  menuItemId: number;
+  quantity: number;
+  itemPrice: string;
+  price: string;
+  comment: string;
+};
+
+export type MenuItem = {
+  id: number;
+  name: string;
+  restaurantId: number;
+  categoryId: number;
+  description: string;
+  ingredients: string;
+  price: number | string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+  restaurant: Restaurant;
+  category: Category;
+  orderItems: OrderItem[];
+};
+
+// If you want to exclude createdAt and updatedAt (as in your normalization example)
+// type MenuItemSelect = Omit<MenuItem, 'createdAt' | 'updatedAt'>;
+
+// For the array of menu items
 export type MenuItemsResponse = MenuItem[];
+// type MenuItemsSelectResponse = MenuItemSelect[];
+
+
+export type MenuItemFormValues = {
+  name: string;
+  restaurantId: number;
+  categoryId: number;
+  description: string;
+  ingredients: string;
+  price: number;
+  active: boolean;
+};

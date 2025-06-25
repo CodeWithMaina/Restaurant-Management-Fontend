@@ -9,6 +9,7 @@ import { userApi } from "../features/api/userApi";
 import { restaurantApi } from "../features/api/restaurantApi";
 import cartReducer from "../features/cart/cartSlice";
 import { orderApi } from "../features/api/ordersApi";
+import { commentApi } from "../features/api/commentApi";
 
 // Persist configs
 const authPersistConfig = {
@@ -30,6 +31,7 @@ const persistCartReducer = persistReducer(cartPersistConfig, cartReducer);
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
+    [commentApi.reducerPath]: commentApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
     [restaurantApi.reducerPath]: restaurantApi.reducer,
@@ -49,7 +51,8 @@ export const store = configureStore({
       menuItemApi.middleware,
       categoryApi.middleware,
       restaurantApi.middleware,
-      orderApi.middleware
+      orderApi.middleware,
+      commentApi.middleware
     ),
 });
 

@@ -14,7 +14,7 @@ export const RestaurantOrders = () => {
   const [expandedOrderId, setExpandedOrderId] = useState<number | null>(null);
 
   const restaurantId = Number(user?.restaurantId);
-  const isAdmin = user?.userType === "admin";
+  const isRestaurantOwner = user?.userType === "restaurant_owner";
 
   const {
     data: restaurantOrders,
@@ -59,7 +59,7 @@ export const RestaurantOrders = () => {
     setExpandedOrderId(expandedOrderId === orderId ? null : orderId);
   };
 
-  if (!isAuthenticated || !isAdmin) {
+  if (!isAuthenticated || !isRestaurantOwner) {
     return (
       <div className="alert alert-error shadow-lg">
         <div className="flex items-center gap-2">

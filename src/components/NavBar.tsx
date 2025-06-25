@@ -153,7 +153,7 @@ const NavBar = () => {
               </Link>
             </motion.div>
           </motion.div>
-        ) : user.userType === "admin" ? (
+        ) : user.userType === "restaurant_owner" ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -48,11 +48,16 @@ export default function LoginPage() {
         dispatch(setCredantials(res));
         navigate("/restaurant/food");
         toast.success(`Welcome, ${res?.userName}`);
-      } else if (res?.userType === "admin") {
+      } else if (res?.userType === "restaurant_owner") {
         dispatch(setCredantials(res));
         navigate("/owner/dashboard");
         toast.success(`Welcome, ${res?.userName}`);
-      } else {
+      }else if (res?.userType === "admin") {
+        // dispatch(setCredantials(res));
+        navigate("/");
+        toast.success(`Not implemented yet, ${res?.userName}`);
+      }
+       else {
         navigate("/");
         toast.success("Welcome to our Restaurant");
       }

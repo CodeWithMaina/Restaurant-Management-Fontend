@@ -28,11 +28,6 @@ const MealMenu: React.FC = () => {
     navigate(`/category-items?id=${categoryId}`)
       };
 
-  // Handle add to cart
-  // const handleAddToCart = (id: number, name: string, price: number | string) =>{
-  //   console.log("Dish data:", name, price, id);
-  // }
-
   if (isLoading || isCategoryLoading) {
     return (
       <div>

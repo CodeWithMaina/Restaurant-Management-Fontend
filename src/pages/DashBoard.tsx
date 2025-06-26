@@ -1,11 +1,12 @@
-import NavBar from "../components/NavBar";
-import { Layout } from "../dashboards/RestaurantOwnerDashboardDesign/Layout";
+import NavBar from "../components/NavBar"
+import { Layout } from "../dashboards/DashboardDesign/Layout"
 
 export const DashBoard = () => {
   return (
     <div>
-      <NavBar />
-      <Layout />
+        <NavBar />
+        <Layout />
     </div>
-  );
-};
+  )
+}
+

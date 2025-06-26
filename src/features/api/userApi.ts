@@ -109,7 +109,7 @@ export type TUser = {
   contactPhone: string;
   confirmationCode: string;
   password: string;
-  userType: 'customer' | 'driver' | 'restaurant_owner' | 'admin';
+  userType: "customer" | "driver" | "restaurant_owner" | "admin";
   phoneVerified: boolean;
   emailVerified: boolean;
   createdAt: string;
@@ -124,7 +124,7 @@ export type TUser = {
 // For forms and API responses
 export type TUserProfile = Pick<
   TUser,
-  'id' | 'name' | 'email' | 'contactPhone' | 'userType'
+  "id" | "name" | "email" | "contactPhone" | "userType"
 > & {
   phoneVerified: boolean;
   emailVerified: boolean;
@@ -142,22 +142,33 @@ export type TAddressFormData = {
 };
 
 export const userApi = createApi({
-    reducerPath:"userApi",
-    baseQuery: fetchBaseQuery({baseUrl:"http://localhost:5000/api/"}),
-    tagTypes: ['User'],
-    endpoints:(builder) => ({
-        // Fetch a user data by ID
-        fetchUserById: builder.query({
-            query: (userId)=>`users/${userId}`
-        }),
-        // Updating User Data
-        updatingUserData: builder.mutation<TUser,{userId: number; user:Partial<TUser>}>({
-            query: ({userId, user})=>({
-                url:`users/${userId}`,
-                method:'PUT',
-                body:user
-            }),
-            invalidatesTags: ['User']
-        })
-    })
-})
+  reducerPath: "userApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/" }),
+  tagTypes: ["User"],
+  endpoints: (builder) => ({
+    // Fetch all users
+    fetchAllUsers: builder.query<TUser[], void>({
+      query: () => "users",
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ id }) => ({ type: "User" as const, id })), "User"]
+          : ["User"],
+    }),
+    // Fetch a user data by ID
+    fetchUserById: builder.query({
+      query: (userId) => `users/${userId}`,
+    }),
+    // Updating User Data
+    updatingUserData: builder.mutation<
+      TUser,
+      { userId: number; user: Partial<TUser> }
+    >({
+      query: ({ userId, user }) => ({
+        url: `users/${userId}`,
+        method: "PUT",
+        body: user,
+      }),
+      invalidatesTags: ["User"],
+    }),
+  }),
+});

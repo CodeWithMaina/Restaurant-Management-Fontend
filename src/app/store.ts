@@ -10,6 +10,8 @@ import { restaurantApi } from "../features/api/restaurantApi";
 import cartReducer from "../features/cart/cartSlice";
 import { orderApi } from "../features/api/ordersApi";
 import { commentApi } from "../features/api/commentApi";
+import { statesApi } from "../features/api/statesApi";
+import { citiesApi } from "../features/api/citiesApi";
 
 // Persist configs
 const authPersistConfig = {
@@ -32,6 +34,8 @@ export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
     [commentApi.reducerPath]: commentApi.reducer,
+    [statesApi.reducerPath]: statesApi.reducer,
+    [citiesApi.reducerPath]: citiesApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
     [restaurantApi.reducerPath]: restaurantApi.reducer,
@@ -52,6 +56,8 @@ export const store = configureStore({
       categoryApi.middleware,
       restaurantApi.middleware,
       orderApi.middleware,
+      statesApi.middleware,
+      citiesApi.middleware,
       commentApi.middleware
     ),
 });

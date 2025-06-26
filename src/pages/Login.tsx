@@ -53,9 +53,9 @@ export default function LoginPage() {
         navigate("/owner/dashboard");
         toast.success(`Welcome, ${res?.userName}`);
       }else if (res?.userType === "admin") {
-        // dispatch(setCredantials(res));
-        navigate("/");
-        toast.success(`Not implemented yet, ${res?.userName}`);
+        dispatch(setCredantials(res));
+        navigate("/admin/analytics");
+        toast.success(`Welcome, ${res?.userName}`);
       }
        else {
         navigate("/");

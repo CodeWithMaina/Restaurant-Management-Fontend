@@ -1,5 +1,5 @@
 import "./App.css";
-import { DashBoard } from "./pages/DashBoard";
+// import { DashBoard } from "./pages/DashBoard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./pages/Register";
 import { Home } from "./pages/Home";
@@ -15,8 +15,20 @@ import { CategoryItemsPage } from "./pages/CategoryItemsPage";
 import { Profile } from "./dashboards/Profile";
 import { Cart } from "./dashboards/CustomerDashboard/Cart";
 import { Orders } from "./dashboards/CustomerDashboard/Orders";
-import { CustomerDashBoard } from "./pages/CustomerDashboard";
 import { RestaurantOrders } from "./dashboards/RestaurantOwnerDashboard/RestaurantOrders";
+import { AllOrders } from "./dashboards/AdminDashboard/AllOrders";
+import { Cities } from "./dashboards/AdminDashboard/Cities";
+import { Analytics } from "./dashboards/AdminDashboard/Analytics";
+import { Users } from "./dashboards/AdminDashboard/Users";
+import { MenuItem } from "./dashboards/AdminDashboard/MenuItem";
+import { States } from "./dashboards/AdminDashboard/States";
+import { Categories } from "./dashboards/AdminDashboard/Categories";
+import { Comments } from "./dashboards/AdminDashboard/Comments";
+import { Restaurants } from "./dashboards/AdminDashboard/Restaurants";
+import { DashBoard } from "./pages/DashBoard";
+import { CustomerDashBoard } from "./pages/CustomerDashboard";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
+import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,10 +40,14 @@ function App() {
       path: "/contact",
       element: <Contact />,
     },
-    // {
-    //   path: "/restaurant",
-    //   element: <Restaurant />,
-    // },
+    {
+      path: "/reset-password",
+      element: <ResetPasswordPage />,
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPasswordPage />,
+    },
     {
       path: "/category-items",
       element: <CategoryItemsPage />,
@@ -97,6 +113,56 @@ function App() {
         {
           path: "orders",
           element: <Orders />,
+        },
+        {
+          path: "profile",
+          element: <Profile />,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: (
+        <ProtectedRoute>
+          <DashBoard />
+        </ProtectedRoute>
+      ),
+      children: [
+        {
+          path: "analytics",
+          element: <Analytics />,
+        },
+        {
+          path: "users",
+          element: <Users />,
+        },
+        {
+          path: "menu-item",
+          element: <MenuItem />,
+        },
+        {
+          path: "restaurants",
+          element: <Restaurants />,
+        },
+        {
+          path: "orders",
+          element: <AllOrders />,
+        },
+        {
+          path: "comments",
+          element: <Comments />,
+        },
+        {
+          path: "categories",
+          element: <Categories />,
+        },
+        {
+          path: "states",
+          element: <States />,
+        },
+        {
+          path: "cities",
+          element: <Cities />,
         },
         {
           path: "profile",

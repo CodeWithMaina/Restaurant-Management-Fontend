@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Restaurant, RestaurantResponse } from "../../types/restaurant.types";
+import type { Restaurant, TRestaurant } from "../../types/restaurant.types";
 
 export const restaurantApi = createApi({
   reducerPath: "restaurantApi",
@@ -16,14 +16,22 @@ export const restaurantApi = createApi({
   }),
   tagTypes: ["Restaurant"],
   endpoints: (builder) => ({
+    // Fetch all restaurants
+    fetchRestaurants: builder.query<TRestaurant[], void>({
+      query: () => 'restaurant',
+      providesTags: (restaurants) => 
+        restaurants ? 
+          [...restaurants.map(({ id }) => ({ type: 'Restaurant' as const, id })), 'Restaurant'] 
+          : ['Restaurant']
+    }),
     // Fetch restaurant by ID
-    fetchRestaurantById: builder.query<RestaurantResponse, number>({
+    fetchRestaurantById: builder.query<TRestaurant, number>({
       query: (restaurantId) => `restaurant/${restaurantId}`,
-      invalidatesTags: ["Restaurant"]
+      providesTags: ["Restaurant"]
     }),
 
     // Create restaurant
-    createRestaurant: builder.mutation<RestaurantResponse, Partial<Restaurant>>({
+    createRestaurant: builder.mutation<TRestaurant, Partial<Restaurant>>({
       query: (restaurantPayload) => ({
         url: 'restaurant',
         method: 'POST',
@@ -33,7 +41,7 @@ export const restaurantApi = createApi({
     }),
 
     // Update restaurant
-    updateRestaurant: builder.mutation<RestaurantResponse, { 
+    updateRestaurant: builder.mutation<TRestaurant, { 
       restaurantId: number; 
       restaurantItem: Partial<Restaurant> 
     }>({
@@ -58,6 +66,7 @@ export const restaurantApi = createApi({
 
 // Export hooks for usage in components
 export const { 
+  useFetchRestaurantsQuery,
   useFetchRestaurantByIdQuery,
   useCreateRestaurantMutation,
   useUpdateRestaurantMutation,

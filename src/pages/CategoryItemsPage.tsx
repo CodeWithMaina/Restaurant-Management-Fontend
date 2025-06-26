@@ -40,6 +40,8 @@ export const CategoryItemsPage = () => {
     [menuItemData, categoryId]
   );
 
+  console.log(categoryMenuItem);
+
   // Loading and error states
   if (isCategoryLoading || isMenuItemsLoading) {
     return <Loading />;

@@ -97,7 +97,28 @@ const handleLogOut = async () => {
                 {isProfileDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-gray-900/95 backdrop-blur-md rounded-xl border border-yellow-400/20 shadow-2xl">
                     <div className="py-2">
-                      {user.userType === "restaurant_owner" && (
+                      {
+                        user.userType === "restaurant_owner" ? (
+                          <a
+                          href="/owner/dashboard"
+                          className="flex items-center space-x-2 px-4 py-2 text-gray-300 hover:text-yellow-400 hover:bg-yellow-400/10 transition-colors"
+                        >
+                          <LayoutDashboard className="w-4 h-4" />
+                          <span>Dashboard</span>
+                        </a>
+                        ): (
+                          user.userType === "admin" && (
+                            <a
+                              href="/admin/analytics"
+                              className="flex items-center space-x-2 px-4 py-2 text-gray-300 hover:text-yellow-400 hover:bg-yellow-400/10 transition-colors"
+                            >
+                              <LayoutDashboard className="w-4 h-4" />
+                              <span>Dashboard</span>
+                            </a>
+                          )
+                        )
+                      }
+                      {/* {user.userType === "restaurant_owner" && (
                         <a
                           href="/owner/dashboard"
                           className="flex items-center space-x-2 px-4 py-2 text-gray-300 hover:text-yellow-400 hover:bg-yellow-400/10 transition-colors"
@@ -105,7 +126,7 @@ const handleLogOut = async () => {
                           <LayoutDashboard className="w-4 h-4" />
                           <span>Dashboard</span>
                         </a>
-                      )}
+                      )} */}
                       <button
                         onClick={handleLogOut}
                         className="flex items-center space-x-2 w-full px-4 py-2 text-gray-300 hover:text-red-400 hover:bg-red-400/10 transition-colors"

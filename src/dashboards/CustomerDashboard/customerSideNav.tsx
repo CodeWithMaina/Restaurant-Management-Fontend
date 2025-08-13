@@ -1,3 +1,4 @@
+// customerSideNav.tsx
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,7 +8,6 @@ export const CustomersideNav = () => {
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
 
-  // Auto-collapse on mobile
   useEffect(() => {
     const handleResize = () => {
       const mobileBreakpoint = window.innerWidth < 768;
@@ -21,43 +21,45 @@ export const CustomersideNav = () => {
 
   const navItems = [
     { name: "Food", path: "/restaurant/food", icon: "🍔" },
-    { name: "Cart", path: "/restaurant/cart", icon: "💬" },
-    { name: "Orders", path: "/restaurant/orders", icon: "💬" },
+    { name: "Cart", path: "/restaurant/cart", icon: "🛒" },
+    { name: "Orders", path: "/restaurant/orders", icon: "📦" },
     { name: "Profile", path: "/restaurant/profile", icon: "👤" },
   ];
 
   return (
     <motion.aside
-      className={`flex flex-col h-screen bg-black text-white border-r border-gray-800 ${
-        isCollapsed ? "w-12" : "w-56"
+      className={`flex flex-col h-screen bg-gray-900 text-white border-r border-gray-800 ${
+        isCollapsed ? "w-16" : "w-64"
       }`}
-      initial={{ width: isMobile ? "3rem" : "20%" }}
+      initial={{ width: isMobile ? "4rem" : "16rem" }}
       animate={{ 
-        width: isCollapsed ? (isMobile ? "3rem" : "3rem") : isMobile ? "12rem" : "14rem" 
+        width: isCollapsed ? "4rem" : isMobile ? "16rem" : "16rem" 
       }}
       transition={{ duration: 0.3 }}
     >
       {/* Logo/Header */}
-      <motion.div
-        className="flex items-center justify-center py-4 cursor-pointer hover:bg-gray-900"
+      {/* <motion.div
+        className="flex items-center justify-center py-4 px-2 cursor-pointer bg-gray-800"
         onClick={() => setIsCollapsed(!isCollapsed)}
         whileHover={{ backgroundColor: "#1a1a1a" }}
       >
         {isCollapsed ? (
-          <span className="text-lg font-bold text-yellow-400">D</span>
+          <span className="text-xl font-bold text-yellow-400">D</span>
         ) : (
-          <h1 className="text-lg font-bold text-yellow-400">DASHBOARD</h1>
+          <h1 className="text-xl font-bold text-yellow-400">DASHBOARD</h1>
         )}
-      </motion.div>
+      </motion.div> */}
 
-      {/* Navigation Items */}
-      <nav className="flex flex-col space-y-1 p-1">
+      {/* Navigation Items - Scrollable Area */}
+      <nav className="flex-1 overflow-y-auto py-2 px-1 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
         {navItems.map((item) => (
           <Link to={item.path} key={item.name}>
             <motion.div
-              className={`flex items-center p-2 rounded-lg ${
-                location.pathname === item.path ? "bg-gray-800" : "hover:bg-gray-800"
-              } ${isCollapsed ? "justify-center px-2" : "justify-start px-3"}`} 
+              className={`flex items-center p-3 rounded-lg mx-1 my-1 ${
+                location.pathname === item.path 
+                  ? "bg-yellow-400/10 border border-yellow-400/30" 
+                  : "hover:bg-gray-800"
+              } ${isCollapsed ? "justify-center" : "justify-start"}`} 
               whileHover={{ backgroundColor: "#1e1e1e" }}
               title={isCollapsed ? item.name : ""}
               tabIndex={0}
@@ -83,11 +85,15 @@ export const CustomersideNav = () => {
       {/* Collapse Toggle (Desktop) */}
       {!isMobile && (
         <motion.button
-          className="mt-auto p-2 text-gray-400 hover:text-white text-sm" 
+          className="mt-auto p-3 text-gray-400 hover:text-yellow-400 text-sm bg-gray-800 flex items-center justify-center" 
           onClick={() => setIsCollapsed(!isCollapsed)}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ backgroundColor: "#1a1a1a" }}
         >
-          {isCollapsed ? "→" : "←"}
+          {isCollapsed ? (
+            <span className="text-lg">→</span>
+          ) : (
+            <span className="text-lg">← Collapse</span>
+          )}
         </motion.button>
       )}
     </motion.aside>
